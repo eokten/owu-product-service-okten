@@ -9,6 +9,18 @@ spring:
       resourceserver:
         jwt:
           issuer-uri: "http://localhost:9090/realms/owu-ecommerce"
+  cloud:
+    bus:
+      enabled: true
+    config:
+      name: product-service
+  config:
+    import: optional:configserver:http://localhost:8888
+  kafka:
+    bootstrap-servers: localhost:9092
 
 server:
   port: 8080
+
+app:
+  allowed-shop-ids: 3,4

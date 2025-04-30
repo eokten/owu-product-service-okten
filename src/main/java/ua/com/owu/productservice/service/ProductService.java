@@ -1,6 +1,8 @@
 package ua.com.owu.productservice.service;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.cloud.context.config.annotation.RefreshScope;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.ResourceAccessException;
 import ua.com.owu.productservice.api.rest.model.CreateProductRequestDto;
@@ -15,6 +17,7 @@ import java.math.BigDecimal;
 import java.util.List;
 import java.util.Optional;
 
+@RefreshScope
 @Service
 @RequiredArgsConstructor
 public class ProductService {
@@ -25,8 +28,15 @@ public class ProductService {
 
     private final UserService userService;
 
+    @Value("${app.allowed-shop-ids}")
+    private final List<String> allowedShopIds;
+
     public ProductResponseDto createProduct(CreateProductRequestDto createProductDto) {
         String shopId = createProductDto.getShopId();
+
+        if (!allowedShopIds.contains(shopId)) {
+            throw new ResourceAccessException("Shop id '%s' is not allowed".formatted(shopId));
+        }
 
         if (!userService.getUserAssignedShopIds().contains(shopId)) {
             throw new ResourceAccessException("User is not assigned to this shop");
