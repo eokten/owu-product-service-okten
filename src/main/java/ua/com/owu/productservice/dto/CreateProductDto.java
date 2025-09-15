@@ -11,6 +11,7 @@ import java.math.BigDecimal;
 public record CreateProductDto(
         @NotBlank String name,
         @NotBlank String category,
-        @NotNull @DecimalMin(value = "0.0", inclusive = false) BigDecimal price
+        @NotNull @DecimalMin(value = "0.0", inclusive = false) BigDecimal price,
+        @NotBlank String ownerEmail
 ) {
 }

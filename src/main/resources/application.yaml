@@ -4,6 +4,21 @@ spring:
   data:
     mongodb:
       uri: mongodb://localhost:27017/product-db
+  mail:
+    host: smtp.gmail.com
+    port: 587
+    username: ${mail.username}
+    password: ${mail.password}
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            enable: true
 
 server:
   port: 8080
+
+app:
+  email:
+    sender: ${mail.sender}

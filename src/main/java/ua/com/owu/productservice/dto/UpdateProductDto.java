@@ -11,6 +11,7 @@ import java.math.BigDecimal;
 public record UpdateProductDto(
         @NotBlank String name,
         @NotBlank String category,
-        @NotNull @DecimalMin(value = "0.0", inclusive = false) BigDecimal price
+        @NotNull @DecimalMin(value = "0.0", inclusive = false) BigDecimal price,
+        @NotBlank String ownerEmail
 ) {
 }

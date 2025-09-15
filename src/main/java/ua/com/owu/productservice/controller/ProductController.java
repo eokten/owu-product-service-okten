@@ -11,7 +11,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
 import ua.com.owu.productservice.dto.CreateProductDto;
 import ua.com.owu.productservice.dto.PatchProductDto;
 import ua.com.owu.productservice.dto.ProductDto;
@@ -31,6 +33,15 @@ public class ProductController {
     @PostMapping
     public ProductDto createProduct(@RequestBody @Valid CreateProductDto createProductDto) {
         return productService.createProduct(createProductDto);
+    }
+
+    @PutMapping("/{productId}/image")
+    public ResponseEntity<?> uploadProductImage(
+            @PathVariable("productId") String productId,
+            @RequestParam("file") MultipartFile file
+    ) {
+        productService.uploadProductImage(productId, file);
+        return ResponseEntity.accepted().build();
     }
 
     @GetMapping("/{productId}")

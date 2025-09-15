@@ -9,6 +9,7 @@ public record ProductDto(
         String id,
         String name,
         String category,
-        BigDecimal price
+        BigDecimal price,
+        String ownerEmail
 ) {
 }
