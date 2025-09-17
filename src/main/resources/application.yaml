@@ -3,7 +3,8 @@ spring:
     name: ProductService
   data:
     mongodb:
-      uri: mongodb://localhost:27017/product-db
+      uri: ${MONGO_URL}
+      database: ${MONGO_DB:product-db}
 
 server:
   port: 8080

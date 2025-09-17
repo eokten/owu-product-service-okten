@@ -33,3 +33,5 @@ build/
 .vscode/
 
 misc/keycloak/owu-ecommerce-realm-google-idp.json
+
+src/main/resources/application-secrets.yaml
